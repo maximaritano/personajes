@@ -53,5 +53,22 @@ luisa le aparecen primero aurora y después el castillo"{
 }
 
 test "A luisa le aparece aurora, sin que se le haya cargado un personaje activo"{
+	assert.throwsException({luisa.aparece(aurora)})
+}
+test"Luisa tiene como personaje activo a mario. Le aparece primero aurora, después el
+castillo y tipa. El arma de floki es la ballesta. Luego el personaje activo de luisa es
+floki. a floki se le aparece la estatua de oro. El personaje activo de luisa es fulano.
+A luisa se le aparece la estatua de oro, tipa, aurora, y tipa de nuevo."{
+	luisa.asignarPersonaje(mario)
 	luisa.aparece(aurora)
+	luisa.aparece(castillo)
+	luisa.aparece(tipa)
+	floki.cambiarArma(ballesta)
+	luisa.asignarPersonaje(floki)
+	luisa.aparece(estatuaDeOro)
+	luisa.asignarPersonaje(fulano)
+	luisa.aparece(estatuaDeOro)
+	luisa.aparece(tipa)
+	luisa.aparece(aurora)
+	luisa.aparece(tipa)
 }
