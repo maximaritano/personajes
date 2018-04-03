@@ -1,0 +1,57 @@
+import personajes.*
+
+// auto-generated at 25/03/2018 18:25:20
+test "floki encuentra castillo con defensa 150, ballesta con 7 flechas" {
+	ballesta.registrarUso()
+	ballesta.registrarUso()
+	ballesta.registrarUso()
+	floki.encontrar(castillo)
+	assert.equals(146, castillo.defensa())
+	assert.equals(6, ballesta.flechas())
+}
+
+test "luisa tiene como personaje activo a mario. A luisa le aparece primero aurora,
+y después el castillo"{
+	
+	luisa.asignarPersonaje(mario)
+	luisa.aparece(aurora)
+	luisa.aparece(castillo)
+	assert.equals(45, mario.valorRecolectado())
+	assert.equals(true, mario.esFeliz())
+	assert.equals(170, castillo.defensa())
+}
+
+test "floki tiene como arma la jabalina. luisa tiene como personaje activo a mario.
+A luisa le aparece la tipa. Después el personaje activo cambia a floki, y después
+de este cambio, a luisa le aparecen primero aurora y después el castillo."{
+	
+	floki.cambiarArma(jabalina)
+	luisa.asignarPersonaje(mario)
+	luisa.aparece(tipa)
+	luisa.asignarPersonaje(floki)
+	luisa.aparece(aurora)
+	luisa.aparece(castillo)
+	assert.equals(16, mario.valorRecolectado())
+	assert.equals(9, tipa.altura())
+	assert.equals(false, mario.esFeliz())
+	assert.equals(false, aurora.estaViva())
+	assert.equals(150, castillo.defensa())
+	assert.equals(false, jabalina.estaCargada())
+}
+
+test "floki tiene como arma la ballesta, luisa tiene como personaje activo a floki. A
+luisa le aparecen primero aurora y después el castillo"{
+	floki.cambiarArma(ballesta)
+	luisa.asignarPersonaje(floki)
+	luisa.aparece(aurora)
+	luisa.aparece(castillo)
+	assert.equals(0, mario.valorRecolectado())
+	assert.equals(true, aurora.estaViva())
+	assert.equals(146, castillo.defensa())
+	assert.equals(true, ballesta.estaCargada())
+	assert.equals(8, ballesta.flechas())
+}
+
+test "A luisa le aparece aurora, sin que se le haya cargado un personaje activo"{
+	luisa.aparece(aurora)
+}
